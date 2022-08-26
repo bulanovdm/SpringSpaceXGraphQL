@@ -1,0 +1,15 @@
+schema: 'src/main/graphql/schema.graphql'
+documents: 'src/main/graphql/operations/*.graphql'
+generates:
+  ./src/main/kotlin/com/bulanovdm/ssgql/SpaceXTypes.kt:
+    plugins:
+      - kotlin
+    config:
+      strictScalars: true
+      scalars:
+        Date: Date
+        ObjectID: String
+        timestamptz: Timestamp
+        uuid: UUID
+
+
