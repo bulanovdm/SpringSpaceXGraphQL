@@ -3,4 +3,3 @@ language: java
 jdk: openjdk17
 before_install:
   - chmod a+x gradlew
-sccript: ./gradlew build
