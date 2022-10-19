@@ -5,6 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import org.springframework.web.servlet.resource.PathResourceResolver
 
 
 @ConstructorBinding
@@ -44,4 +47,16 @@ class ClientConfiguration(val configuration: ApplicationConfiguration) {
                 .scalar(objectID)
                 .scalar(uuid)
         } */
+}
+
+@Configuration
+class ResourceResolver : WebMvcConfigurer {
+
+    override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+        registry
+            .addResourceHandler("/images/**")
+            .addResourceLocations("classpath:/images/")
+            .setCachePeriod(604800).resourceChain(true)
+            .addResolver(PathResourceResolver())
+    }
 }
