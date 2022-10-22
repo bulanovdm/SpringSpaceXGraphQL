@@ -20,77 +20,78 @@ import kotlin.String
 import kotlin.Unit
 import kotlin.collections.List
 
-public data class PastLaunchesListQuery(
-  public val limit: Int,
-) : Query<PastLaunchesListQuery.Data> {
-  public override fun id(): String = OPERATION_ID
+public data class PastLaunchesListQuery(public val limit: Int) : Query<PastLaunchesListQuery.Data> {
+    public override fun id(): String = OPERATION_ID
 
-  public override fun document(): String = OPERATION_DOCUMENT
+    public override fun document(): String = OPERATION_DOCUMENT
 
-  public override fun name(): String = OPERATION_NAME
+    public override fun name(): String = OPERATION_NAME
 
-  public override fun serializeVariables(writer: JsonWriter,
-      customScalarAdapters: CustomScalarAdapters): Unit {
-    PastLaunchesListQuery_VariablesAdapter.toJson(writer, customScalarAdapters, this)
-  }
+    public override fun serializeVariables(
+        writer: JsonWriter,
+        customScalarAdapters: CustomScalarAdapters
+    ): Unit {
+        PastLaunchesListQuery_VariablesAdapter.toJson(writer, customScalarAdapters, this)
+    }
 
-  public override fun adapter(): Adapter<Data> = PastLaunchesListQuery_ResponseAdapter.Data.obj()
+    public override fun adapter(): Adapter<Data> = PastLaunchesListQuery_ResponseAdapter.Data.obj()
 
-  public override fun rootField(): CompiledField = CompiledField.Builder(
-    name = "data",
-    type = com.bulanovdm.ssgql.graphql.type.Query.type
-  )
-  .selections(selections = PastLaunchesListQuerySelections.__root)
-  .build()
+    public override fun rootField(): CompiledField = CompiledField.Builder(
+        name = "data",
+        type = com.bulanovdm.ssgql.graphql.type.Query.type
+    )
+        .selections(selections = PastLaunchesListQuerySelections.__root)
+        .build()
 
-  public data class Data(
-    public val launchesPast: List<LaunchesPast?>?,
-  ) : Query.Data
+    public data class Data(
+        public val launchesPast: List<LaunchesPast?>?,
+    ) : Query.Data
 
-  public data class LaunchesPast(
-    public val id: String?,
-    public val mission_id: List<String?>?,
-    public val links: Links?,
-    public val rocket: Rocket?,
-    public val launch_date_utc: Any?,
-  )
+    public data class LaunchesPast(
+        public val id: String?,
+        public val mission_id: List<String?>?,
+        public val links: Links?,
+        public val rocket: Rocket?,
+        public val launch_date_utc: Any?,
+    )
 
-  public data class Links(
-    public val flickr_images: List<String?>?,
-    public val mission_patch_small: String?,
-  )
+    public data class Links(
+        public val flickr_images: List<String?>?,
+        public val mission_patch_small: String?,
+    )
 
-  public data class Rocket(
-    public val rocket_name: String?,
-  )
+    public data class Rocket(
+        public val rocket_name: String?,
+    )
 
-  public companion object {
-    public const val OPERATION_ID: String =
-        "f859aa464662f502ed7d590fe9041ec6a3e53e883bd0297b0a74a7dd4307f66b"
+    public companion object {
+        public const val OPERATION_ID: String =
+            "f859aa464662f502ed7d590fe9041ec6a3e53e883bd0297b0a74a7dd4307f66b"
 
-    /**
-     * The minimized GraphQL document being sent to the server to save a few bytes.
-     * The un-minimized version is:
-     *
-     * query pastLaunchesList($limit: Int!) {
-     *   launchesPast(limit: $limit) {
-     *     id
-     *     mission_id
-     *     links {
-     *       flickr_images
-     *       mission_patch_small
-     *     }
-     *     rocket {
-     *       rocket_name
-     *     }
-     *     launch_date_utc
-     *   }
-     * }
-     */
-    public val OPERATION_DOCUMENT: String
-      get() =
-          "query pastLaunchesList(${'$'}limit: Int!) { launchesPast(limit: ${'$'}limit) { id mission_id links { flickr_images mission_patch_small } rocket { rocket_name } launch_date_utc } }"
+        /**
+         * The minimized GraphQL document being sent to the server to save a few bytes.
+         * The un-minimized version is:
+         *
+         * query pastLaunchesList($limit: Int!) {
+         *   launchesPast(limit: $limit) {
+         *     id
+         *     mission_id
+         *     links {
+         *       flickr_images
+         *       mission_patch_small
+         *     }
+         *     rocket {
+         *       rocket_name
+         *     }
+         *     launch_date_utc
+         *   }
+         * }
+         */
 
-    public const val OPERATION_NAME: String = "pastLaunchesList"
-  }
+        public val OPERATION_DOCUMENT: String
+            get() =
+                "query pastLaunchesList(${'$'}limit: Int!) { launchesPast(limit: ${'$'}limit) { id mission_id links { flickr_images mission_patch_small } rocket { rocket_name } launch_date_utc } }"
+
+        public const val OPERATION_NAME: String = "pastLaunchesList"
+    }
 }
